@@ -1,3 +1,17 @@
+import asyncio
+import sys
+
+# Ensure event loop exists in macOS Streamlit threads
+if sys.platform == "darwin":
+    try:
+        asyncio.set_event_loop(asyncio.new_event_loop())
+    except RuntimeError:
+        pass
+
+
+
+
+
 import streamlit as st
 from PyPDF2 import PdfReader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -61,7 +75,7 @@ def user_input(user_question):
 
 # main function to run the streamlit app
 def main():
-    st.title("PDF Chatbot")
+    st.title("CHANDAN Chatbot")
     st.write("Upload your PDF files and ask questions about the content.")
     
     pdf_docs = st.file_uploader("Upload PDF files", type="pdf", accept_multiple_files=True)
